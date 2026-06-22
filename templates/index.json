@@ -23,7 +23,7 @@
             "overlay_color": "#00000040",
             "overlay_style": "gradient",
             "gradient_direction": "to top",
-            "horizontal_alignment": "flex-start",
+            "horizontal_alignment": "center",
             "vertical_alignment": "center",
             "content_alignment": "left",
             "subheading": "",
