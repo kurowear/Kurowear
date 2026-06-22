@@ -153,8 +153,8 @@
           <div
             class="hero-slider__content {{ section.settings.section_width }}"
             style="
-              --content-h-align: {{ section.settings.horizontal_alignment }};
-              --content-v-align: {{ section.settings.vertical_alignment }};
+              --content-h-align: {{ block.settings.horizontal_alignment }};
+              --content-v-align: {{ block.settings.vertical_alignment }};
             "
           >
             <div
@@ -445,6 +445,56 @@
   .hero-slider__content-inner[style*='text-align: center'] .hero-slider__buttons { justify-content: center; }
   .hero-slider__content-inner[style*='text-align: right'] .hero-slider__buttons  { justify-content: flex-end; }
 
+  /* ─── Button styles ─── */
+  .hero-slider__buttons .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    /* Primary (default) */
+    background: var(--color-button, #111);
+    color: var(--color-button-text, #fff);
+    border: 2px solid var(--color-button, #111);
+  }
+
+  .hero-slider__buttons .button:hover {
+    opacity: 0.85;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  }
+
+  /* Secondary */
+  .hero-slider__buttons .button--secondary {
+    background: var(--color-button-secondary, rgba(255,255,255,0.15));
+    color: var(--color-button-secondary-text, #fff);
+    border: 2px solid var(--color-button-secondary-text, #fff);
+  }
+
+  .hero-slider__buttons .button--secondary:hover {
+    background: var(--color-button-secondary-text, #fff);
+    color: var(--color-button-secondary, #111);
+  }
+
+  /* Outline (tertiary) */
+  .hero-slider__buttons .button--tertiary {
+    background: transparent;
+    color: var(--color-button-text, #fff);
+    border: 2px solid currentColor;
+  }
+
+  .hero-slider__buttons .button--tertiary:hover {
+    background: var(--color-button-text, #fff);
+    color: var(--color-button, #111);
+    border-color: var(--color-button-text, #fff);
+  }
+
   /* ─── Navigation arrows ─── */
   .hero-slider__nav {
     position: absolute;
@@ -707,6 +757,28 @@
         },
         {
           "type": "select",
+          "id": "horizontal_alignment",
+          "label": "Horizontal position",
+          "options": [
+            { "value": "flex-start", "label": "t:options.left" },
+            { "value": "center",     "label": "t:options.center" },
+            { "value": "flex-end",   "label": "t:options.right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "vertical_alignment",
+          "label": "Vertical position",
+          "options": [
+            { "value": "flex-start", "label": "t:options.top" },
+            { "value": "center",     "label": "t:options.center" },
+            { "value": "flex-end",   "label": "t:options.bottom" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
           "id": "content_alignment",
           "label": "Text alignment",
           "options": [
@@ -883,28 +955,7 @@
       ],
       "default": "page-width"
     },
-    {
-      "type": "select",
-      "id": "horizontal_alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        { "value": "flex-start", "label": "t:options.left" },
-        { "value": "center",     "label": "t:options.center" },
-        { "value": "flex-end",   "label": "t:options.right" }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "vertical_alignment",
-      "label": "t:settings.position",
-      "options": [
-        { "value": "flex-start", "label": "t:options.top" },
-        { "value": "center",     "label": "t:options.center" },
-        { "value": "flex-end",   "label": "t:options.bottom" }
-      ],
-      "default": "center"
-    },
+
     {
       "type": "select",
       "id": "section_height",
@@ -972,6 +1023,8 @@
             "text": "<p>Add your description here.</p>",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/all",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
             "content_alignment": "center",
             "toggle_overlay": true,
             "overlay_style": "gradient"
@@ -986,8 +1039,6 @@
         "show_arrows": true,
         "show_dots": true,
         "section_height": "large",
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
         "padding_top": 40,
         "padding_bottom": 40,
         "color_scheme": "scheme-5"
