@@ -30,7 +30,7 @@
             "text": "",
             "button_label": "Shop Now",
             "button_link": "",
-            "button_style": "primary",
+            "button_style": "outline",
             "button_new_tab": false,
             "button_2_label": "",
             "button_2_link": "",
