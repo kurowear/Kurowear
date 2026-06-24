@@ -393,7 +393,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "Q3. What makes Kurowear gym t-shirts different from regular gym wear brands?",
+                "heading": "Q3. What anime series are referenced in Kurowear's collection?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -403,7 +403,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><strong>Ans: </strong>Most gym wear brands focus on performance fabric or generic motivational quotes. Kurowear focuses on original graphic design bold typography, attitude-driven artwork, and gym culture aesthetics that go beyond a basic quote on a t-shirts. The brand targets serious gym goers who want to wear something that reflects the culture, not just the activity.</p>",
+                    "text": "<p><strong>Ans: </strong>Kurowear's anime collection draws aesthetic inspiration from popular series including Naruto, Jujutsu Kaisen, Demon Slayer, One Piece, Dragon Ballz and other animes. Designs are abstract and culture-coded rather than direct character reproductions.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
