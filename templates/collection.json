@@ -511,46 +511,6 @@
               "block_order": [
                 "text_4AyHpn"
               ]
-            },
-            "accordion_row_BEtVKg": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "Q6. Is cash on delivery available for gym t-shirts in India?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_kwUHNn": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p><strong>Ans: </strong>Yes, COD is available across India for all Kurowear gym t-shirts. A small handling fee may apply at checkout. Free shipping.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_kwUHNn"
-              ]
             }
           },
           "block_order": [
@@ -558,8 +518,7 @@
             "accordion_row_PtPB7N",
             "accordion_row_TF8LcG",
             "accordion_row_cLqg7H",
-            "accordion_row_qmWQwW",
-            "accordion_row_BEtVKg"
+            "accordion_row_qmWQwW"
           ]
         }
       },
