@@ -434,7 +434,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "Q4. What is the best oversized gym t-shirt size for Indian men?",
+                "heading": "Q4. What size should I order for an oversized anime t-shirt?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -444,7 +444,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><strong>Ans: </strong>Kurowear gym t-shirts are cut in a true oversized style suited to Indian body proportions. For a relaxed but structured look, order your regular size. For a baggier streetwear-style fit, size up by one. Check our Size Guide for exact chest and length measurements.</p>",
+                    "text": "<p><strong>Ans: </strong>All Kurowear anime tshirts are cut in an oversized style. If you want a relaxed but not boxy fit, size down by one from your regular size. Check our Size Guide page for exact measurements in inches and cm.<br/><br/></p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -475,7 +475,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "Q5. Do Kurowear gym t-shirts shrink after washing?",
+                "heading": "Q5. Will the print on the anime tshirt fade after washing?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
