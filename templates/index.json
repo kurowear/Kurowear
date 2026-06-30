@@ -1186,7 +1186,7 @@
           "name": "t:names.title",
           "static": true,
           "settings": {
-            "text": "<h3>Blogs</h3>",
+            "text": "<h2>Blogs</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -1244,7 +1244,7 @@
               "name": "t:names.title",
               "static": true,
               "settings": {
-                "type_preset": "h2",
+                "type_preset": "h3",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
