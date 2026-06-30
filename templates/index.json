@@ -1233,7 +1233,7 @@
               "settings": {
                 "image_ratio": "adapt",
                 "border": "none",
-                "border_width": 1,
+                "border_width": 0,
                 "border_opacity": 100,
                 "border_radius": 0
               },
@@ -1244,7 +1244,7 @@
               "name": "t:names.title",
               "static": true,
               "settings": {
-                "type_preset": "rte",
+                "type_preset": "h2",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
