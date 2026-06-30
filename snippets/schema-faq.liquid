@@ -1,9 +1,9 @@
 {%- comment -%}
   snippets/schema-faq.liquid
-  Compatible with the Horizon FAQ section
+  FAQPage Schema for FAQ section
 {%- endcomment -%}
 
-{%- assign first_question = true -%}
+{%- assign first_item = true -%}
 
 <script type="application/ld+json">
 {
@@ -12,37 +12,19 @@
   "mainEntity": [
     {%- for block in section.blocks -%}
 
-      {%- if block.type == 'accordion' -%}
+      {%- if block.settings.heading != blank and block.settings.text != blank -%}
 
-        {%- for row in block.blocks -%}
-
-          {%- assign answer = '' -%}
-
-          {%- for child in row.blocks -%}
-            {%- if child.type == 'text' -%}
-              {%- assign answer = child.settings.text | strip_html | strip_newlines | strip -%}
-            {%- endif -%}
-          {%- endfor -%}
-
-          {%- if row.settings.heading != blank and answer != blank -%}
-
-            {%- unless first_question -%},{%- endunless -%}
-
-            {
-              "@type": "Question",
-              "@id": "{{ canonical_url }}#faq-{{ row.id }}",
-              "name": {{ row.settings.heading | strip_html | json }},
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": {{ answer | truncate: 1000 | json }}
-              }
-            }
-
-            {%- assign first_question = false -%}
-
-          {%- endif -%}
-
-        {%- endfor -%}
+        {%- unless first_item -%},{%- endunless -%}
+        {
+          "@type": "Question",
+          "@id": "{{ canonical_url }}#faq-{{ block.id }}",
+          "name": {{ block.settings.heading | strip_html | strip_newlines | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.text | strip_html | strip_newlines | json }}
+          }
+        }
+        {%- assign first_item = false -%}
 
       {%- endif -%}
 
