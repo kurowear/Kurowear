@@ -959,6 +959,7 @@
         "group_LDyJJP": {
           "type": "group",
           "name": "t:names.column",
+          "disabled": true,
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
@@ -1077,14 +1078,14 @@
       "name": "t:names.multicolumn",
       "settings": {
         "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "vertical_on_mobile": false,
+        "horizontal_alignment": "center",
         "vertical_alignment": "flex-start",
         "align_baseline": true,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "flex-start",
         "gap": 24,
-        "section_width": "full-width",
+        "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
         "color_scheme": "scheme-1",
