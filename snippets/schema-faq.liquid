@@ -1,0 +1,36 @@
+{%- comment -%}
+  Snippet: snippets/schema-faq.liquid
+  Rendered from: sections/faq-accordion.liquid (just before {% schema %})
+  Usage:    {%- render 'schema-faq', section: section -%}
+  Purpose:  FAQPage JSON-LD for AI Overview and featured snippet eligibility.
+  Block:    Uses this theme's actual block type "faq" with settings:
+              - faq_title (textarea) — the question
+              - faq_des   (richtext) — the answer
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  {%- assign faq_blocks = section.blocks | where: "type", "faq" -%}
+  {%- if faq_blocks.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in faq_blocks -%}
+      {%- if block.settings.faq_title != blank and block.settings.faq_des != blank -%}
+    {
+      "@type": "Question",
+      "@id": "{{ canonical_url }}#faq-{{ forloop.index }}",
+      "name": {{ block.settings.faq_title | strip_html | strip_newlines | json }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ block.settings.faq_des | strip_html | strip_newlines | truncate: 700 | json }}
+      }
+    }{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+  {%- endif -%}
+{%- endif -%}
