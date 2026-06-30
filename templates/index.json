@@ -35,7 +35,7 @@
             "button_style": "outline",
             "button_new_tab": false,
             "button_2_label": "",
-            "button_2_link": "",
+            "button_2_link": "shopify://collections/anime-tshirts",
             "button_2_style": "outline",
             "button_2_new_tab": false
           }
@@ -63,7 +63,7 @@
             "button_style": "outline",
             "button_new_tab": false,
             "button_2_label": "",
-            "button_2_link": "",
+            "button_2_link": "shopify://collections/gym-tshirts",
             "button_2_style": "outline",
             "button_2_new_tab": false
           }
