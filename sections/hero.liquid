@@ -1,3 +1,4 @@
+
 ​{%- comment -%}
   Hero Slider — dynamic block-based slider.
   Each block = one slide with its own media background, overlay, and content.
@@ -12,11 +13,15 @@
   class="hero-slider color-{{ section.settings.color_scheme }}"
   style="
     {% if section.settings.section_height == 'custom' %}
-      --hero-min-height: {{ section.settings.section_height_custom }}svh;
+      --hero-height: calc({{ section.settings.section_height_custom }}svh - var(--header-group-height, 0px));
     {% elsif section.settings.section_height == 'full-screen' %}
-      --hero-min-height: 100svh;
+      --hero-height: calc(100svh - var(--header-group-height, 0px));
+    {% elsif section.settings.section_height == 'large' %}
+      --hero-height: clamp(560px, 82svh, 900px);
+    {% elsif section.settings.section_height == 'medium' %}
+      --hero-height: clamp(460px, 68svh, 760px);
     {% else %}
-      --hero-min-height: var(--section-height-{{ section.settings.section_height }}, 60svh);
+      --hero-height: clamp(360px, 54svh, 620px);
     {% endif %}
     --slider-transition: {{ section.settings.transition_speed }}ms;
     --slider-padding-top: {{ section.settings.padding_top }}px;
@@ -286,12 +291,14 @@
 
   .hero-slider {
     position: relative;
-    min-height: calc(var(--hero-min-height, 60svh) - var(--header-group-height, 0px));
+    min-height: var(--hero-height, 68svh);
+    height: var(--hero-height, 68svh);
     overflow: hidden;
   }
 
   .hero-slider[data-shopify-visual-preview] {
     min-height: 600px;
+    height: 600px;
   }
 
   /* Section-level link overlay */
@@ -303,8 +310,8 @@
 
   /* ─── Track ─── */
   .hero-slider__track-wrapper {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    height: 100%;
   }
 
   .hero-slider__track {
