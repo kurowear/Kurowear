@@ -1,4 +1,4 @@
-{% comment %}
+​{% comment %}
   Hero Slider — dynamic block-based slider.
   Each block = one slide with its own media background, overlay, and content.
   Section settings control slider behaviour, height, layout, and appearance.
@@ -167,7 +167,13 @@
               {%- endif -%}
 
               {%- if block.settings.heading != blank -%}
-                <{{ block.settings.heading_tag }} class="hero-slider__heading">
+                <{{ block.settings.heading_tag }}
+                  class="hero-slider__heading"
+                  style="
+                    --hero-heading-size-desktop: {{ block.settings.heading_size_desktop }}px;
+                    --hero-heading-size-mobile: {{ block.settings.heading_size_mobile }}px;
+                  "
+                >
                   {{- block.settings.heading | escape -}}
                 </{{ block.settings.heading_tag }}>
               {%- endif -%}
@@ -429,6 +435,14 @@
 
   .hero-slider__heading {
     margin: 0 0 14px;
+    font-size: var(--hero-heading-size-desktop, clamp(3rem, 5vw, 4.5rem));
+    line-height: 1.1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-slider__heading {
+      font-size: var(--hero-heading-size-mobile, 3rem);
+    }
   }
 
   .hero-slider__text {
@@ -802,7 +816,7 @@
         {
           "type": "select",
           "id": "heading_tag",
-          "label": "Heading size",
+          "label": "Heading tag",
           "options": [
             { "value": "h1", "label": "Extra large (H1)" },
             { "value": "h2", "label": "Large (H2)" },
@@ -810,6 +824,26 @@
             { "value": "h4", "label": "Small (H4)" }
           ],
           "default": "h2"
+        },
+        {
+          "type": "range",
+          "id": "heading_size_desktop",
+          "label": "Heading size (desktop)",
+          "min": 24,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 64
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "label": "Heading size (mobile)",
+          "min": 18,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 40
         },
         {
           "type": "richtext",
