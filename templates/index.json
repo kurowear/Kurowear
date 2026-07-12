@@ -113,7 +113,7 @@
         "transition_speed": 500,
         "show_arrows": true,
         "show_dots": true,
-        "link": "shopify://collections/all",
+        "link": "",
         "open_in_new_tab": false,
         "section_width": "page-width",
         "section_height": "full-screen",
