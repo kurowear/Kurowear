@@ -46,6 +46,19 @@
     <div id="header-group">
       {% sections 'header-group' %}
     </div>
+    
+    <script>
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.kuro-accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.kuro-accordion-header').forEach(b => b.classList.remove('active'));
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('active');
+    }
+  }
+</script>
 
     <script>
       // Inline header height and menu style calculations to prevent layout shift
