@@ -1,0 +1,149 @@
+<style>
+  .kuro-accordion {
+    border-top: 1px solid #222;
+    margin-top: 20px;
+    font-family: inherit;
+  }
+  .kuro-accordion-item {
+    border-bottom: 1px solid #222;
+  }
+  .kuro-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .kuro-accordion-header span.icon {
+    font-size: 18px;
+    color: #E63946;
+    transition: transform 0.3s ease;
+  }
+  .kuro-accordion-header.active span.icon {
+    transform: rotate(45deg);
+  }
+  .kuro-accordion-body {
+    display: none;
+    padding: 0 0 16px 0;
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.7;
+  }
+  .kuro-accordion-body.open {
+    display: block;
+  }
+  .kuro-accordion-body ul {
+    padding-left: 18px;
+    margin: 8px 0;
+  }
+  .kuro-accordion-body ul li {
+    margin-bottom: 6px;
+  }
+  .kuro-accordion-body strong {
+    color: #ffffff;
+  }
+</style>
+
+<div class="kuro-accordion">
+
+  <!-- DESCRIPTION -->
+  <div class="kuro-accordion-item">
+    <button class="kuro-accordion-header active" onclick="toggleAccordion(this)">
+      Description <span class="icon">+</span>
+    </button>
+    <div class="kuro-accordion-body open">
+      <p>Not everyone is waiting for the weekend. Some are building their own story.</p>
+      <p>This one's for the freelancers, the side hustlers, the creators, and the startup founders who are done playing supporting roles. Wear it to your next coffee shop work session, college, or just out on the streets.</p>
+      <p>Most people wait for a salary hike. Main characters build their own. This design is for the ones who decided that a 9-to-5 is just the beginning — not the whole story. Smart decisions. Multiple income streams. Bigger results.</p>
+      <p>The <strong>Main Character. Side Salary.</strong> oversized graphic tee is built for hustlers, creators, freelancers, and entrepreneurs who refuse to settle for ordinary. Bold streetwear-inspired graphic with a powerful message — representing ambition, independence, and modern hustle culture.</p>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAILS -->
+  <div class="kuro-accordion-item">
+    <button class="kuro-accordion-header" onclick="toggleAccordion(this)">
+      Product Details <span class="icon">+</span>
+    </button>
+    <div class="kuro-accordion-body">
+      <ul>
+        <li><strong>Fit:</strong> Oversized Unisex</li>
+        <li><strong>Fabric:</strong> 100% Premium Cotton</li>
+        <li><strong>GSM:</strong> 240 GSM</li>
+        <li><strong>Neck:</strong> Lycra Ribbed Round Neck</li>
+        <li><strong>Print Type:</strong> DTF (Direct to Film) — bold, crack-proof, long-lasting</li>
+        <li><strong>Available Colors:</strong> Black, Navy, Dark Green, Maroon, Purple, Olive & more</li>
+        <li><strong>Sizes:</strong> S / M / L / XL / XXL</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="kuro-accordion-item">
+    <button class="kuro-accordion-header" onclick="toggleAccordion(this)">
+      Features <span class="icon">+</span>
+    </button>
+    <div class="kuro-accordion-body">
+      <ul>
+        <li>Premium oversized streetwear fit</li>
+        <li>Bold motivational graphic print</li>
+        <li>Soft, breathable cotton fabric</li>
+        <li>DTF print — durable, crack-proof, long-lasting</li>
+        <li>Unisex design</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PERFECT FOR -->
+  <div class="kuro-accordion-item">
+    <button class="kuro-accordion-header" onclick="toggleAccordion(this)">
+      Perfect For <span class="icon">+</span>
+    </button>
+    <div class="kuro-accordion-body">
+      <ul>
+        <li>Entrepreneurs & Freelancers</li>
+        <li>Side Hustlers & Creators</li>
+        <li>College Students & Startup Founders</li>
+        <li>Streetwear Lovers</li>
+        <li>Everyday Casual Wear</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CARE INSTRUCTIONS -->
+  <div class="kuro-accordion-item">
+    <button class="kuro-accordion-header" onclick="toggleAccordion(this)">
+      Care Instructions <span class="icon">+</span>
+    </button>
+    <div class="kuro-accordion-body">
+      <ul>
+        <li>Wash inside-out in cold water</li>
+        <li>Do not iron directly on the print</li>
+        <li>Do not bleach</li>
+        <li>Air dry recommended</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.kuro-accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.kuro-accordion-header').forEach(b => b.classList.remove('active'));
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('active');
+    }
+  }
+</script>
