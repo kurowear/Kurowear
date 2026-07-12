@@ -228,6 +228,7 @@
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
+                "show_pickup_availability": true,
                 "gift_card_form": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -257,6 +258,14 @@
                 }
               },
               "block_order": []
+            },
+            "custom_liquid_NEnenY": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<div style=\"background:#f8f8f8; border:1px solid #e0e0e0; border-radius:6px; padding:10px 14px; font-size:15px; color:#333;\">\n  <strong>Order now</strong> - Delivered in 5-8 business days across India\n</div>"
+              },
+              "blocks": {}
             },
             "text_aEtTtq": {
               "type": "text",
@@ -291,6 +300,7 @@
             "variant_picker_R3rGDr",
             "ai_gen_block_8362137_qGCgNe",
             "buy_buttons_eYQEYi",
+            "custom_liquid_NEnenY",
             "text_aEtTtq"
           ]
         }
