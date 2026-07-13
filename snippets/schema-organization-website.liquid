@@ -5,109 +5,37 @@
   Fires:    Homepage only (request.page_type == 'index').
 {%- endcomment -%}
 
-{%- if request.page_type == 'index' -%}
-  {%- assign org_id = shop.url | append: '#organization' -%}
-  {%- assign website_id = shop.url | append: '#website' -%}
-  {%- assign org_locale = request.locale.iso_code | default: 'en' -%}
-  {%- assign price_range = settings.org_price_range | default: '$$$' -%}
-
-  {%- assign logo_url = '' -%}
-  {%- if settings.logo != blank -%}
-    {%- capture logo_candidate -%}{{ settings.logo | image_url: width: 600 }}{%- endcapture -%}
-    {%- if logo_candidate contains '//' and logo_candidate contains 'shopify' -%}
-      {%- assign logo_url = logo_candidate | prepend: 'https:' -%}
-    {%- endif -%}
-  {%- endif -%}
-
-  {%- capture social_csv -%}
-    {%- if settings.social_facebook_link != blank -%}{{ settings.social_facebook_link }}||{%- endif -%}
-    {%- if settings.social_instagram_link != blank -%}{{ settings.social_instagram_link }}||{%- endif -%}
-    {%- if settings.social_pinterest_link != blank -%}{{ settings.social_pinterest_link }}||{%- endif -%}
-    {%- if settings.social_twitter_link != blank -%}{{ settings.social_twitter_link }}||{%- endif -%}
-    {%- if settings.social_tiktok_link != blank -%}{{ settings.social_tiktok_link }}||{%- endif -%}
-    {%- if settings.social_youtube_link != blank -%}{{ settings.social_youtube_link }}||{%- endif -%}
-  {%- endcapture -%}
-  {%- assign social_csv = social_csv | strip | replace_last: '||', '' -%}
-  {%- if social_csv != blank -%}
-    {%- assign social_links = social_csv | split: '||' -%}
-  {%- else -%}
-    {%- assign social_links = '' | split: ',' -%}
-  {%- endif -%}
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "JewelryStore",
-      "@id": "{{ org_id }}",
-      "name": {{ shop.name | json }},
-      "url": "{{ shop.url }}",
-      {%- if logo_url != blank -%}
-      "logo": {
-        "@type": "ImageObject",
-        "url": {{ logo_url | json }}
-      },
-      {%- endif -%}
-      "description": {{ shop.description | default: settings.meta_description | json }},
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "availableLanguage": "English",
-        "areaServed": "US",
-        "email": "{{ shop.email }}",
-        "telephone": {{ settings.org_telephone | default: '+1-502-602-7906' | json }}
-      }{%- if social_links.size > 0 -%},
-      "sameAs": {{ social_links | json }}{%- endif -%},
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": {{ settings.org_street_address | default: '62 W 47th St STE 1212' | json }},
-        "addressLocality": {{ settings.org_address_locality | default: 'New York' | json }},
-        "addressRegion": {{ settings.org_address_region | default: 'NY' | json }},
-        "postalCode": {{ settings.org_postal_code | default: '10036' | json }},
-        "addressCountry": {{ settings.org_address_country | default: 'US' | json }}
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": {{ settings.org_opens | default: '09:00' | json }},
-          "closes": {{ settings.org_closes | default: '17:00' | json }}
-        }
-      ],
-      "priceRange": {{ price_range | json }},
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Diamond Jewelry Collections",
-        "itemListElement": [
-          { "@type": "OfferCatalog", "name": "Engagement Rings" },
-          { "@type": "OfferCatalog", "name": "Women's Wedding Bands" },
-          { "@type": "OfferCatalog", "name": "Men's Wedding Bands" },
-          { "@type": "OfferCatalog", "name": "Diamond Earrings" },
-          { "@type": "OfferCatalog", "name": "Diamond Bracelets" },
-          { "@type": "OfferCatalog", "name": "Initial Pendants" },
-          { "@type": "OfferCatalog", "name": "Lab Grown Diamond" },
-          { "@type": "OfferCatalog", "name": "Natural Diamond" }
-        ]
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "{{ website_id }}",
-      "url": "{{ shop.url }}",
-      "name": {{ shop.name | json }},
-      "description": {{ shop.description | default: settings.meta_description | json }},
-      "publisher": { "@id": "{{ org_id }}" },
-      "inLanguage": {{ org_locale | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      }
-    }
+  "@type": "Organization",
+  "name": "Kurowear",
+  "alternateName": "Kuro Wear",
+  "url": "https://kurowear.in/",
+  "logo": "https://kurowear.in/cdn/shop/files/kurowear_logo.png",
+  "image": "https://kurowear.in/cdn/shop/files/kurowear_logo.png",
+  "description": "Kurowear is an India-based streetwear brand creating original oversized graphic t-shirts across anime, gym, and dark humor themes. Designs are printed in-house using DTF technology on 180-240 GSM cotton, with pan-India Cash on Delivery.",
+  "email": "kurowear85@gmail.com",
+  "telephone": "+91-9724466771",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-9724466771",
+    "email": "kurowear85@gmail.com",
+    "contactType": "customer service",
+    "areaServed": "IN",
+    "availableLanguage": ["English", "Hindi"]
+  },
+  "sameAs": [
+    "https://www.instagram.com/REPLACE_WITH_YOUR_HANDLE",
+    "https://www.facebook.com/REPLACE_WITH_YOUR_HANDLE"
   ]
 }
 </script>
-{%- endif -%}
