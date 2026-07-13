@@ -5,11 +5,11 @@
   {% endif %}
   lang="{{ request.locale.iso_code }}"
 >
-{% render 'schema-breadcrumb' %}
+{% render 'breadcrumb-schema' %}
 {% render 'schema-product', product: product %}
 {% render 'organization-schema' %}
 {% if template == 'page.frequently-asked-questions' %}
-  {% render 'schema-faq' %}
+  {% render 'faq-accordion' %}
 {% endif %}
 {% render 'schema-article', article: article, blog: blog %}
   <head>
