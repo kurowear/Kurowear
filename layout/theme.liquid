@@ -6,7 +6,7 @@
   lang="{{ request.locale.iso_code }}"
 >
 {% render 'breadcrumb-schema' %}
-{% render 'schema-product', product: product %}
+{% render 'product-schema', product: product %}
 {% render 'organization-schema' %}
 {% if template == 'page.frequently-asked-questions' %}
   {% render 'faq-accordion' %}
