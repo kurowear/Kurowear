@@ -7,6 +7,10 @@
 >
 {% render 'schema-breadcrumb' %}
 {% render 'schema-product', product: product %}
+{% render 'schema-organization-website' %}
+{% if template == 'page.frequently-asked-questions' %}
+  {% render 'schema-faq' %}
+{% endif %}
   <head>
     <meta name="google-site-verification" content="2ioe7YNXpxcW-U1iPFI7rdNs5CpeidtpKrYp50ixzUU" />
     {%- if settings.favicon != blank -%}
