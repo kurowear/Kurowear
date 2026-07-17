@@ -13,8 +13,10 @@
 {% if template == 'page.frequently-asked-questions' %}
   {% render 'faq-accordion' %}
 {% endif %}
+{% if template == 'article, blog' %}
+  {% render 'article-schema', article: article, blog: blog %}
+{% endif %}
 
-{% render 'article-schema', article: article, blog: blog %}
   <head>
     <meta name="google-site-verification" content="2ioe7YNXpxcW-U1iPFI7rdNs5CpeidtpKrYp50ixzUU" />
     {%- if settings.favicon != blank -%}
