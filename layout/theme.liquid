@@ -80,6 +80,43 @@
 [aria-label="Sky Blue"] + * { background: #87CEEB !important; }
 [aria-label="Teal"] + * { background: #008080 !important; }
 </style>
+<style>
+/* Hide color name text inside swatch boxes */
+.variant-option--swatches .variant-option__button-label__text {
+  display: none !important;
+}
+
+/* Small circular boxes */
+.variant-option--swatches .variant-option__button-label {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Horizontal flex layout */
+.variant-option--swatches {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+/* Hide pill element */
+.variant-option--swatches .variant-option__button-label__pill {
+  display: none !important;
+}
+
+/* Selected state — red border */
+.variant-option--swatches input[type="radio"]:checked + .variant-option__button-label,
+.variant-option--swatches input[type="radio"]:checked ~ span {
+  outline: 2px solid #E63946 !important;
+  outline-offset: 2px !important;
+}
+</style>
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
