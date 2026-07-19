@@ -1,27 +1,63 @@
-{%- doc -%}
-  Renders a swatch either from a variant image object or a swatch object.
-
-  @param {object} swatch - a swatch object
-  @param {object} [variant_image] - an alternate image when there is no swatch value
-  @param {string} [mode] - one of 'unscaled', 'filter', 'pill'
-  @param {string} [label] - visually-hidden accessible label for the swatch (e.g. the color name)
-
-  @example
-  {% render 'swatch', swatch: swatch, variant_image: variant_image, mode: 'unscaled', label: option_value.name %}
-{%- enddoc -%}
-
 {% liquid
   assign swatch_value = null
   assign extra_classes = ''
-  if settings.show_variant_image and variant_image
-    assign swatch_image_width = settings.variant_swatch_width | times: 2
-    assign swatch_image_url = variant_image | image_url: width: swatch_image_width
-    assign swatch_value = 'url(' | append: swatch_image_url | append: ')'
-    assign extra_classes = extra_classes | append: ' swatch--variant-image'
-  elsif swatch.image
-    assign swatch_image_url = swatch.image | image_url: width: 80
-    assign swatch_value = 'url(' | append: swatch_image_url | append: ')'
-  elsif swatch.color
+
+  case product_option_value.name
+    when 'White'
+      assign swatch_value = '#FFFFFF'
+    when 'Black'
+      assign swatch_value = '#000000'
+    when 'Navy Blue'
+      assign swatch_value = '#1B2A4A'
+    when 'Bottle Green'
+      assign swatch_value = '#1A3A2A'
+    when 'Royal Blue'
+      assign swatch_value = '#2B4CE0'
+    when 'Maroon'
+      assign swatch_value = '#800000'
+    when 'Purple'
+      assign swatch_value = '#6B21A8'
+    when 'Petrol Blue'
+      assign swatch_value = '#1B4F72'
+    when 'Olive Green'
+      assign swatch_value = '#556B2F'
+    when 'Red'
+      assign swatch_value = '#CC0000'
+    when 'Golden Yellow'
+      assign swatch_value = '#FFD700'
+    when 'Light Baby Pink'
+      assign swatch_value = '#FFB6C1'
+    when 'Coral'
+      assign swatch_value = '#FF6B6B'
+    when 'Mint'
+      assign swatch_value = '#98FF98'
+    when 'Baby Blue'
+      assign swatch_value = '#89CFF0'
+    when 'Grey'
+      assign swatch_value = '#808080'
+    when 'Lavender'
+      assign swatch_value = '#E6E6FA'
+    when 'Yellow'
+      assign swatch_value = '#FFE135'
+    when 'Charcoal'
+      assign swatch_value = '#36454F'
+    when 'Mustard'
+      assign swatch_value = '#FFDB58'
+    when 'Pink'
+      assign swatch_value = '#FFC0CB'
+    when 'Dark Green'
+      assign swatch_value = '#006400'
+    when 'Rust'
+      assign swatch_value = '#B7410E'
+    when 'Sky Blue'
+      assign swatch_value = '#87CEEB'
+    when 'Teal'
+      assign swatch_value = '#008080'
+    when 'Dark Blue'
+      assign swatch_value = '#00008B'
+  endcase
+
+  if swatch.color
     assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
   endif
 
@@ -36,17 +72,10 @@
 %}
 
 <span
-  class="
-    swatch
-    {{ extra_classes }}
-    {% if swatch_value == null %} swatch--unavailable{% endif %}
-  "
-  style="
-    --swatch-background: {{ swatch_value }};
-    {% if swatch.image and settings.show_variant_image == false %} --swatch-focal-point: {{ swatch.image.presentation.focal_point }};{% endif %}
-  "
->
-</span>
+  class="swatch {{ extra_classes }}{% if swatch_value == null %} swatch--unavailable{% endif %}"
+  style="--swatch-background: {{ swatch_value }};"
+></span>
+
 {%- if label != blank -%}
   <span class="visually-hidden">{{ label }}</span>
 {%- endif -%}
