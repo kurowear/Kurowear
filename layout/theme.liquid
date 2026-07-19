@@ -52,68 +52,59 @@
     {{ content_for_header }}
     {% # theme-check-enable RemoteAsset %}
 <style>
-/* Color Swatches */
-.variant-option__button-label--has-swatch { width: 32px !important; height: 32px !important; min-width: unset !important; padding: 0 !important; border-radius: 50% !important; overflow: hidden !important; }
-[aria-label="Black"] + * { background: #000000 !important; }
-[aria-label="White"] + * { background: #FFFFFF !important; border: 1px solid #ddd !important; }
-[aria-label="Navy Blue"] + * { background: #1B2A4A !important; }
-[aria-label="Bottle Green"] + * { background: #1A3A2A !important; }
-[aria-label="Royal Blue"] + * { background: #2B4CE0 !important; }
-[aria-label="Maroon"] + * { background: #800000 !important; }
-[aria-label="Purple"] + * { background: #6B21A8 !important; }
-[aria-label="Petrol Blue"] + * { background: #1B4F72 !important; }
-[aria-label="Olive Green"] + * { background: #556B2F !important; }
-[aria-label="Red"] + * { background: #CC0000 !important; }
-[aria-label="Golden Yellow"] + * { background: #FFD700 !important; }
-[aria-label="Light Baby Pink"] + * { background: #FFB6C1 !important; }
-[aria-label="Coral"] + * { background: #FF6B6B !important; }
-[aria-label="Mint"] + * { background: #98FF98 !important; }
-[aria-label="Baby Blue"] + * { background: #89CFF0 !important; }
-[aria-label="Grey"] + * { background: #808080 !important; }
-[aria-label="Lavender"] + * { background: #E6E6FA !important; }
-[aria-label="Yellow"] + * { background: #FFE135 !important; }
-[aria-label="Charcoal"] + * { background: #36454F !important; }
-[aria-label="Mustard"] + * { background: #FFDB58 !important; }
-[aria-label="Pink"] + * { background: #FFC0CB !important; }
-[aria-label="Dark Green"] + * { background: #006400 !important; }
-[aria-label="Rust"] + * { background: #B7410E !important; }
-[aria-label="Sky Blue"] + * { background: #87CEEB !important; }
-[aria-label="Teal"] + * { background: #008080 !important; }
-/* Hide color name text inside swatch boxes */
+/* Force hide text, show color boxes */
+.variant-option--swatches .variant-option__button-label {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
 .variant-option--swatches .variant-option__button-label__text {
   display: none !important;
 }
 
-/* Small circular boxes */
-.variant-option--swatches .variant-option__button-label {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  border-radius: 50% !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Horizontal flex layout */
-.variant-option--swatches {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  align-items: center !important;
-}
-
-/* Hide pill element */
 .variant-option--swatches .variant-option__button-label__pill {
   display: none !important;
 }
 
-/* Selected state — red border */
-.variant-option--swatches input[type="radio"]:checked + .variant-option__button-label,
-.variant-option--swatches input[type="radio"]:checked ~ span {
-  outline: 2px solid #E63946 !important;
-  outline-offset: 2px !important;
+.variant-option--swatches fieldset {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
 }
+
+/* Color mapping via attribute */
+.variant-option--swatches input[aria-label="White"] ~ .variant-option__button-label { background: #FFFFFF !important; border: 1px solid #ddd !important; }
+.variant-option--swatches input[aria-label="Black"] ~ .variant-option__button-label { background: #000000 !important; }
+.variant-option--swatches input[aria-label="Navy Blue"] ~ .variant-option__button-label { background: #1B2A4A !important; }
+.variant-option--swatches input[aria-label="Bottle Green"] ~ .variant-option__button-label { background: #1A3A2A !important; }
+.variant-option--swatches input[aria-label="Royal Blue"] ~ .variant-option__button-label { background: #2B4CE0 !important; }
+.variant-option--swatches input[aria-label="Maroon"] ~ .variant-option__button-label { background: #800000 !important; }
+.variant-option--swatches input[aria-label="Purple"] ~ .variant-option__button-label { background: #6B21A8 !important; }
+.variant-option--swatches input[aria-label="Petrol Blue"] ~ .variant-option__button-label { background: #1B4F72 !important; }
+.variant-option--swatches input[aria-label="Olive Green"] ~ .variant-option__button-label { background: #556B2F !important; }
+.variant-option--swatches input[aria-label="Red"] ~ .variant-option__button-label { background: #CC0000 !important; }
+.variant-option--swatches input[aria-label="Golden Yellow"] ~ .variant-option__button-label { background: #FFD700 !important; }
+.variant-option--swatches input[aria-label="Light Baby Pink"] ~ .variant-option__button-label { background: #FFB6C1 !important; }
+.variant-option--swatches input[aria-label="Coral"] ~ .variant-option__button-label { background: #FF6B6B !important; }
+.variant-option--swatches input[aria-label="Mint"] ~ .variant-option__button-label { background: #98FF98 !important; }
+.variant-option--swatches input[aria-label="Baby Blue"] ~ .variant-option__button-label { background: #89CFF0 !important; }
+.variant-option--swatches input[aria-label="Grey"] ~ .variant-option__button-label { background: #808080 !important; }
+.variant-option--swatches input[aria-label="Lavender"] ~ .variant-option__button-label { background: #E6E6FA !important; }
+.variant-option--swatches input[aria-label="Yellow"] ~ .variant-option__button-label { background: #FFE135 !important; }
+.variant-option--swatches input[aria-label="Charcoal"] ~ .variant-option__button-label { background: #36454F !important; }
+.variant-option--swatches input[aria-label="Mustard"] ~ .variant-option__button-label { background: #FFDB58 !important; }
+.variant-option--swatches input[aria-label="Pink"] ~ .variant-option__button-label { background: #FFC0CB !important; }
+.variant-option--swatches input[aria-label="Dark Green"] ~ .variant-option__button-label { background: #006400 !important; }
+.variant-option--swatches input[aria-label="Rust"] ~ .variant-option__button-label { background: #B7410E !important; }
+.variant-option--swatches input[aria-label="Sky Blue"] ~ .variant-option__button-label { background: #87CEEB !important; }
+.variant-option--swatches input[aria-label="Teal"] ~ .variant-option__button-label { background: #008080 !important; }
 </style>
   </head>
 
