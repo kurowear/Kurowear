@@ -53,22 +53,6 @@
     {% # theme-check-enable RemoteAsset %}
   </head>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var faqItems = document.querySelectorAll('.faq-question');
-    faqItems.forEach(function(item) {
-      item.addEventListener('click', function() {
-        var answer = this.nextElementSibling;
-        var isOpen = answer.style.display === 'block';
-        document.querySelectorAll('.faq-answer').forEach(function(a) {
-          a.style.display = 'none';
-        });
-        answer.style.display = isOpen ? 'none' : 'block';
-      });
-    });
-  });
-</script>
-
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
     <div id="header-group">
