@@ -147,5 +147,21 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.kw-faq-question').forEach(function(question) {
+    question.addEventListener('click', function() {
+      var item = this.closest('.kw-faq-item');
+      var isActive = item.classList.contains('active');
+      document.querySelectorAll('.kw-faq-item').forEach(function(i) {
+        i.classList.remove('active');
+      });
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+});
+</script>
   </body>
 </html>
