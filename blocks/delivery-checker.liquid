@@ -1,0 +1,2621 @@
+{% comment %}
+
+  Delivery Checker Block
+
+  Add this file in: blocks/estimated-delivery-checker.liquid
+
+  Works as a Shopify theme block in Horizon theme
+
+{% endcomment %}
+
+
+{% liquid
+
+  assign block_id = 'ns-delivery-checker-' | append: block.id
+
+%}
+
+
+<div
+
+  id="{{ block_id }}"
+
+  class="ns-delivery-checker"
+
+  data-ns-delivery-checker
+
+  {{ block.shopify_attributes }}
+
+>
+
+  {% if block.settings.label != blank or block.settings.heading != blank or block.settings.subheading != blank %}
+
+    <div class="ns-delivery-header">
+
+      {% if block.settings.label != blank %}
+
+        <span class="ns-delivery-label">
+
+          {{ block.settings.label }}
+
+        </span>
+
+      {% endif %}
+
+
+      {% if block.settings.heading != blank %}
+
+        <div class="ns-delivery-heading">
+
+          {{ block.settings.heading }}
+
+        </div>
+
+      {% endif %}
+
+
+      {% if block.settings.subheading != blank %}
+
+        <div class="ns-delivery-subheading">
+
+          {{ block.settings.subheading }}
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  {% endif %}
+
+
+  <div class="ns-pincode-form" data-pincode-form>
+
+    <input
+
+      type="tel"
+
+      inputmode="numeric"
+
+      pattern="[0-9]*"
+
+      maxlength="6"
+
+      placeholder="{{ block.settings.placeholder | escape }}"
+
+      autocomplete="postal-code"
+
+      data-pincode-input
+
+    >
+
+
+    <button type="button" data-check-btn>
+
+      {{ block.settings.button_text }}
+
+    </button>
+
+  </div>
+
+
+  {% if block.settings.note_text != blank %}
+
+    <p class="ns-pincode-note" data-pincode-note>
+
+      {{ block.settings.note_text }}
+
+    </p>
+
+  {% endif %}
+
+
+  <p class="ns-pincode-error" data-pincode-error hidden>
+
+    {{ block.settings.error_text }}
+
+  </p>
+
+
+  <div class="ns-delivery-result" data-delivery-result hidden>
+
+    <div class="ns-checked-pin">
+
+      <span>
+
+        {{ block.settings.delivery_to_text }}
+
+        <span data-display-pin></span>
+
+      </span>
+
+
+      {% if block.settings.show_tick %}
+
+        <span class="ns-tick">{{ block.settings.tick_text }}</span>
+
+      {% endif %}
+
+
+      <button type="button" class="ns-change-btn" data-change-btn>
+
+        {{ block.settings.change_text }}
+
+      </button>
+
+    </div>
+
+
+    <div class="ns-delivery-info">
+
+      {% if block.settings.delivery_icon != blank %}
+
+        <span class="ns-delivery-icon">
+
+          {{ block.settings.delivery_icon }}
+
+        </span>
+
+      {% endif %}
+
+
+      <span>
+
+        {{ block.settings.estimated_text }}
+
+        <span data-delivery-date></span>
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<style>
+
+  #{{ block_id }},
+
+  #{{ block_id }} * {
+
+    box-sizing: border-box;
+
+  }
+
+
+  #{{ block_id }} {
+
+    width: 100%;
+
+    margin-top: {{ block.settings.margin_top }}px;
+
+    margin-bottom: {{ block.settings.margin_bottom }}px;
+
+    padding: {{ block.settings.box_padding }}px;
+
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+
+    border-radius: {{ block.settings.border_radius }}px;
+
+    background: {{ block.settings.box_background }};
+
+    color: {{ block.settings.text_color }};
+
+    font-family: {{ block.settings.font_family }};
+
+    font-weight: {{ block.settings.font_weight }};
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-header {
+
+    margin-bottom: {{ block.settings.header_gap }}px;
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: {{ block.settings.label_color }};
+
+    font-size: {{ block.settings.label_size }}px;
+
+    line-height: 1.2;
+
+    text-transform: {{ block.settings.label_transform }};
+
+    letter-spacing: {{ block.settings.label_spacing }}px;
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-heading {
+
+    color: {{ block.settings.heading_color }};
+
+    font-size: {{ block.settings.heading_size }}px;
+
+    line-height: 1.35;
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-subheading {
+
+    margin-top: 5px;
+
+    color: {{ block.settings.subheading_color }};
+
+    font-size: {{ block.settings.subheading_size }}px;
+
+    line-height: 1.4;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form {
+
+    display: flex;
+
+    align-items: stretch;
+
+    width: 100%;
+
+    gap: {{ block.settings.input_button_gap }}px;
+
+    margin-bottom: {{ block.settings.form_gap_bottom }}px;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form input {
+
+    flex: 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: {{ block.settings.input_height }}px;
+
+    padding: 0 {{ block.settings.input_padding_x }}px;
+
+    border: {{ block.settings.input_border_width }}px solid {{ block.settings.input_border_color }};
+
+    border-radius: {{ block.settings.input_radius }}px;
+
+    background: {{ block.settings.input_background }};
+
+    color: {{ block.settings.input_text_color }};
+
+    font-size: {{ block.settings.input_font_size }}px;
+
+    font-family: inherit;
+
+    font-weight: inherit;
+
+    outline: none;
+
+    box-shadow: none;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form input::placeholder {
+
+    color: {{ block.settings.placeholder_color }};
+
+    opacity: 1;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form input:focus {
+
+    border-color: {{ block.settings.input_focus_border }};
+
+    outline: none;
+
+    box-shadow: none;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form button {
+
+    height: {{ block.settings.button_height }}px;
+
+    min-width: {{ block.settings.button_min_width }}px;
+
+    padding: 0 {{ block.settings.button_padding_x }}px;
+
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+
+    border-radius: {{ block.settings.button_radius }}px;
+
+    background: {{ block.settings.button_background }};
+
+    color: {{ block.settings.button_text_color }};
+
+    font-size: {{ block.settings.button_font_size }}px;
+
+    font-family: inherit;
+
+    font-weight: inherit;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-form button:hover {
+
+    background: {{ block.settings.button_hover_background }};
+
+    border-color: {{ block.settings.button_hover_border_color }};
+
+    color: {{ block.settings.button_hover_text_color }};
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-note {
+
+    margin: 0 0 {{ block.settings.note_gap_bottom }}px;
+
+    color: {{ block.settings.note_color }};
+
+    font-size: {{ block.settings.note_size }}px;
+
+    line-height: 1.4;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-error {
+
+    margin: 0 0 {{ block.settings.error_gap_bottom }}px;
+
+    color: {{ block.settings.error_color }};
+
+    font-size: {{ block.settings.error_size }}px;
+
+    line-height: 1.4;
+
+  }
+
+
+  #{{ block_id }} .ns-pincode-error[hidden],
+
+  #{{ block_id }} .ns-delivery-result[hidden] {
+
+    display: none !important;
+
+  }
+
+
+  #{{ block_id }} .ns-checked-pin,
+
+  #{{ block_id }} .ns-delivery-info {
+
+    width: 100%;
+
+    padding: {{ block.settings.result_padding_y }}px {{ block.settings.result_padding_x }}px;
+
+    border: {{ block.settings.result_border_width }}px solid {{ block.settings.result_border_color }};
+
+    border-radius: {{ block.settings.result_radius }}px;
+
+    background: {{ block.settings.result_background }};
+
+    color: {{ block.settings.result_text_color }};
+
+    font-size: {{ block.settings.result_font_size }}px;
+
+    line-height: 1.4;
+
+  }
+
+
+  #{{ block_id }} .ns-checked-pin {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: {{ block.settings.result_gap }}px;
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+  }
+
+
+  #{{ block_id }} [data-display-pin] {
+
+    color: {{ block.settings.pin_color }};
+
+  }
+
+
+  #{{ block_id }} [data-delivery-date] {
+
+    color: {{ block.settings.date_color }};
+
+  }
+
+
+  #{{ block_id }} .ns-tick {
+
+    color: {{ block.settings.tick_color }};
+
+    font-size: {{ block.settings.tick_size }}px;
+
+    line-height: 1;
+
+  }
+
+
+  #{{ block_id }} .ns-change-btn {
+
+    margin-left: auto;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: {{ block.settings.change_color }};
+
+    font-size: {{ block.settings.change_size }}px;
+
+    font-family: inherit;
+
+    font-weight: inherit;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    text-decoration: {% if block.settings.change_underline %}underline{% else %}none{% endif %};
+
+    text-underline-offset: 3px;
+
+  }
+
+
+  #{{ block_id }} .ns-delivery-icon {
+
+    font-size: {{ block.settings.icon_size }}px;
+
+    line-height: 1;
+
+  }
+
+
+  @media screen and (max-width: 749px) {
+
+    #{{ block_id }} {
+
+      margin-top: {{ block.settings.mobile_margin_top }}px;
+
+      margin-bottom: {{ block.settings.mobile_margin_bottom }}px;
+
+      padding: {{ block.settings.mobile_box_padding }}px;
+
+      border-radius: {{ block.settings.mobile_border_radius }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-delivery-label {
+
+      font-size: {{ block.settings.mobile_label_size }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-delivery-heading {
+
+      font-size: {{ block.settings.mobile_heading_size }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-delivery-subheading {
+
+      font-size: {{ block.settings.mobile_subheading_size }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-pincode-form {
+
+      gap: {{ block.settings.mobile_input_button_gap }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-pincode-form input {
+
+      height: {{ block.settings.mobile_input_height }}px;
+
+      font-size: {{ block.settings.mobile_input_font_size }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-pincode-form button {
+
+      height: {{ block.settings.mobile_button_height }}px;
+
+      min-width: {{ block.settings.mobile_button_min_width }}px;
+
+      font-size: {{ block.settings.mobile_button_font_size }}px;
+
+    }
+
+
+    #{{ block_id }} .ns-pincode-note,
+
+    #{{ block_id }} .ns-pincode-error,
+
+    #{{ block_id }} .ns-checked-pin,
+
+    #{{ block_id }} .ns-delivery-info {
+
+      font-size: {{ block.settings.mobile_result_font_size }}px;
+
+    }
+
+
+    {% if block.settings.mobile_stack %}
+
+      #{{ block_id }} .ns-pincode-form {
+
+        flex-direction: column;
+
+      }
+
+
+      #{{ block_id }} .ns-pincode-form button {
+
+        width: 100%;
+
+      }
+
+    {% endif %}
+
+  }
+
+
+  {{ block.settings.custom_css }}
+
+</style>
+
+
+<script>
+
+  (function () {
+
+    var deliveryBox = document.getElementById('{{ block_id }}');
+
+
+    if (!deliveryBox || deliveryBox.dataset.loaded === 'true') return;
+
+    deliveryBox.dataset.loaded = 'true';
+
+
+    var input = deliveryBox.querySelector('[data-pincode-input]');
+
+    var checkBtn = deliveryBox.querySelector('[data-check-btn]');
+
+    var pincodeForm = deliveryBox.querySelector('[data-pincode-form]');
+
+    var resultBox = deliveryBox.querySelector('[data-delivery-result]');
+
+    var note = deliveryBox.querySelector('[data-pincode-note]');
+
+    var error = deliveryBox.querySelector('[data-pincode-error]');
+
+    var displayPin = deliveryBox.querySelector('[data-display-pin]');
+
+    var deliveryDate = deliveryBox.querySelector('[data-delivery-date]');
+
+    var changeBtn = deliveryBox.querySelector('[data-change-btn]');
+
+
+    var storageKey = 'ns_saved_pincode_{{ block.id }}';
+
+
+    if (!input || !checkBtn || !pincodeForm || !resultBox) return;
+
+
+    function cleanPincode(value) {
+
+      return String(value || '').replace(/\D/g, '').slice(0, 6);
+
+    }
+
+
+    function getPincodeZone(pin) {
+
+      var p = parseInt(pin, 10);
+
+
+      if (
+
+        (p >= 110001 && p <= 110096) ||
+
+        (p >= 201001 && p <= 201310) ||
+
+        (p >= 122001 && p <= 122508) ||
+
+        (p >= 124001 && p <= 124507) ||
+
+        (p >= 131001 && p <= 131402) ||
+
+        (p >= 121001 && p <= 121106) ||
+
+        (p >= 245001 && p <= 245412)
+
+      ) {
+
+        return {{ block.settings.zone_1_days }};
+
+      }
+
+
+      if (
+
+        (p >= 200001 && p <= 285205) ||
+
+        (p >= 125001 && p <= 136156) ||
+
+        (p >= 140001 && p <= 160059) ||
+
+        (p >= 301001 && p <= 345034) ||
+
+        (p >= 246001 && p <= 263680) ||
+
+        (p >= 170001 && p <= 177213)
+
+      ) {
+
+        return {{ block.settings.zone_2_days }};
+
+      }
+
+
+      if (
+
+        (p >= 450001 && p <= 488776) ||
+
+        (p >= 800001 && p <= 855117) ||
+
+        (p >= 360001 && p <= 396590) ||
+
+        (p >= 400001 && p <= 445402) ||
+
+        (p >= 490001 && p <= 497778) ||
+
+        (p >= 700001 && p <= 743710)
+
+      ) {
+
+        return {{ block.settings.zone_3_days }};
+
+      }
+
+
+      return {{ block.settings.default_delivery_days }};
+
+    }
+
+
+    function getDeliveryDate(days) {
+
+      var date = new Date();
+
+      date.setDate(date.getDate() + Number(days || 0));
+
+
+      return date.toLocaleDateString('en-IN', {
+
+        weekday: {% if block.settings.show_weekday %}'short'{% else %}undefined{% endif %},
+
+        month: 'short',
+
+        day: 'numeric'
+
+      });
+
+    }
+
+
+    function showError() {
+
+      if (error) error.hidden = false;
+
+    }
+
+
+    function hideError() {
+
+      if (error) error.hidden = true;
+
+    }
+
+
+    function showResult(pin) {
+
+      var days = getPincodeZone(pin);
+
+
+      pincodeForm.style.display = 'none';
+
+
+      if (note) note.style.display = 'none';
+
+      if (displayPin) displayPin.textContent = pin;
+
+      if (deliveryDate) deliveryDate.textContent = getDeliveryDate(days);
+
+
+      resultBox.hidden = false;
+
+      hideError();
+
+
+      {% if block.settings.remember_pincode %}
+
+        try {
+
+          localStorage.setItem(storageKey, pin);
+
+        } catch (e) {}
+
+      {% endif %}
+
+    }
+
+
+    function checkPincode() {
+
+      var pin = cleanPincode(input.value);
+
+      input.value = pin;
+
+
+      if (pin.length !== 6) {
+
+        showError();
+
+        return;
+
+      }
+
+
+      showResult(pin);
+
+    }
+
+
+    function changePincode() {
+
+      pincodeForm.style.display = 'flex';
+
+
+      if (note) note.style.display = '';
+
+      if (input) input.value = '';
+
+
+      resultBox.hidden = true;
+
+      hideError();
+
+
+      {% if block.settings.remember_pincode %}
+
+        try {
+
+          localStorage.removeItem(storageKey);
+
+        } catch (e) {}
+
+      {% endif %}
+
+
+      setTimeout(function () {
+
+        input.focus();
+
+      }, 50);
+
+    }
+
+
+    input.addEventListener('input', function () {
+
+      input.value = cleanPincode(input.value);
+
+      hideError();
+
+    });
+
+
+    input.addEventListener('keydown', function (event) {
+
+      if (event.key === 'Enter') {
+
+        event.preventDefault();
+
+        checkPincode();
+
+      }
+
+    });
+
+
+    checkBtn.addEventListener('click', checkPincode);
+
+
+    if (changeBtn) {
+
+      changeBtn.addEventListener('click', changePincode);
+
+    }
+
+
+    {% if block.settings.remember_pincode %}
+
+      try {
+
+        var savedPin = localStorage.getItem(storageKey);
+
+
+        if (savedPin && cleanPincode(savedPin).length === 6) {
+
+          input.value = cleanPincode(savedPin);
+
+          showResult(cleanPincode(savedPin));
+
+        }
+
+      } catch (e) {}
+
+    {% endif %}
+
+  })();
+
+</script>
+
+
+{% schema %}
+
+{
+
+  "name": "Delivery checker",
+
+  "settings": [
+
+    {
+
+      "type": "header",
+
+      "content": "Text content"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "label",
+
+      "label": "Label",
+
+      "default": "Delivery Details"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "heading",
+
+      "label": "Heading",
+
+      "default": "95% orders are shipped within 24 hours"
+
+    },
+
+    {
+
+      "type": "textarea",
+
+      "id": "subheading",
+
+      "label": "Subheading",
+
+      "default": "Check estimated delivery time before placing your order."
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "placeholder",
+
+      "label": "Input placeholder",
+
+      "default": "Enter pincode"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "button_text",
+
+      "label": "Button text",
+
+      "default": "Check"
+
+    },
+
+    {
+
+      "type": "textarea",
+
+      "id": "note_text",
+
+      "label": "Note text",
+
+      "default": "Enter your PIN code to check estimated delivery time."
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "error_text",
+
+      "label": "Error text",
+
+      "default": "Please enter a valid 6 digit pincode."
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "delivery_to_text",
+
+      "label": "Delivery to text",
+
+      "default": "Delivery to"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "estimated_text",
+
+      "label": "Estimated text",
+
+      "default": "Estimated delivery by"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "change_text",
+
+      "label": "Change text",
+
+      "default": "Change"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "delivery_icon",
+
+      "label": "Delivery icon",
+
+      "default": "🚚"
+
+    },
+
+    {
+
+      "type": "checkbox",
+
+      "id": "show_tick",
+
+      "label": "Show tick",
+
+      "default": true
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "tick_text",
+
+      "label": "Tick text",
+
+      "default": "✓"
+
+    },
+
+    {
+
+      "type": "checkbox",
+
+      "id": "show_weekday",
+
+      "label": "Show weekday in date",
+
+      "default": true
+
+    },
+
+    {
+
+      "type": "checkbox",
+
+      "id": "remember_pincode",
+
+      "label": "Remember pincode",
+
+      "default": true
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Delivery timing"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "zone_1_days",
+
+      "label": "Zone 1 delivery days",
+
+      "min": 1,
+
+      "max": 15,
+
+      "step": 1,
+
+      "default": 2
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "zone_2_days",
+
+      "label": "Zone 2 delivery days",
+
+      "min": 1,
+
+      "max": 15,
+
+      "step": 1,
+
+      "default": 3
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "zone_3_days",
+
+      "label": "Zone 3 delivery days",
+
+      "min": 1,
+
+      "max": 15,
+
+      "step": 1,
+
+      "default": 4
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "default_delivery_days",
+
+      "label": "Default delivery days",
+
+      "min": 1,
+
+      "max": 15,
+
+      "step": 1,
+
+      "default": 5
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Box style"
+
+    },
+
+    {
+
+      "type": "text",
+
+      "id": "font_family",
+
+      "label": "Font family",
+
+      "default": "inherit"
+
+    },
+
+    {
+
+      "type": "select",
+
+      "id": "font_weight",
+
+      "label": "Font weight",
+
+      "default": "500",
+
+      "options": [
+
+        {
+
+          "value": "400",
+
+          "label": "400"
+
+        },
+
+        {
+
+          "value": "500",
+
+          "label": "500"
+
+        },
+
+        {
+
+          "value": "600",
+
+          "label": "600"
+
+        },
+
+        {
+
+          "value": "700",
+
+          "label": "700"
+
+        }
+
+      ]
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "margin_top",
+
+      "label": "Margin top",
+
+      "min": 0,
+
+      "max": 80,
+
+      "step": 2,
+
+      "default": 0
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "margin_bottom",
+
+      "label": "Margin bottom",
+
+      "min": 0,
+
+      "max": 80,
+
+      "step": 2,
+
+      "default": 0
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "box_padding",
+
+      "label": "Box padding",
+
+      "min": 0,
+
+      "max": 60,
+
+      "step": 1,
+
+      "default": 14
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "border_radius",
+
+      "label": "Box radius",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "border_width",
+
+      "label": "Box border width",
+
+      "min": 0,
+
+      "max": 5,
+
+      "step": 1,
+
+      "default": 1
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "box_background",
+
+      "label": "Box background",
+
+      "default": "#ffffff"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "border_color",
+
+      "label": "Border color",
+
+      "default": "#ececec"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "text_color",
+
+      "label": "Text color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Header style"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "header_gap",
+
+      "label": "Header gap",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 12
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "label_color",
+
+      "label": "Label color",
+
+      "default": "#777777"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "label_size",
+
+      "label": "Label size",
+
+      "min": 8,
+
+      "max": 28,
+
+      "step": 1,
+
+      "default": 12
+
+    },
+
+    {
+
+      "type": "select",
+
+      "id": "label_transform",
+
+      "label": "Label transform",
+
+      "default": "uppercase",
+
+      "options": [
+
+        {
+
+          "value": "none",
+
+          "label": "None"
+
+        },
+
+        {
+
+          "value": "uppercase",
+
+          "label": "Uppercase"
+
+        },
+
+        {
+
+          "value": "capitalize",
+
+          "label": "Capitalize"
+
+        }
+
+      ]
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "label_spacing",
+
+      "label": "Label letter spacing",
+
+      "min": 0,
+
+      "max": 3,
+
+      "step": 0.1,
+
+      "default": 0.7
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "heading_color",
+
+      "label": "Heading color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "heading_size",
+
+      "label": "Heading size",
+
+      "min": 10,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 16
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "subheading_color",
+
+      "label": "Subheading color",
+
+      "default": "#777777"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "subheading_size",
+
+      "label": "Subheading size",
+
+      "min": 10,
+
+      "max": 28,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Input style"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_button_gap",
+
+      "label": "Input button gap",
+
+      "min": 0,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 8
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "form_gap_bottom",
+
+      "label": "Form bottom gap",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 8
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_height",
+
+      "label": "Input height",
+
+      "min": 30,
+
+      "max": 70,
+
+      "step": 1,
+
+      "default": 44
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_padding_x",
+
+      "label": "Input side padding",
+
+      "min": 6,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 12
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_radius",
+
+      "label": "Input radius",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_border_width",
+
+      "label": "Input border width",
+
+      "min": 0,
+
+      "max": 5,
+
+      "step": 1,
+
+      "default": 1
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "input_font_size",
+
+      "label": "Input font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 14
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "input_background",
+
+      "label": "Input background",
+
+      "default": "#ffffff"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "input_text_color",
+
+      "label": "Input text color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "placeholder_color",
+
+      "label": "Placeholder color",
+
+      "default": "#9b9b9b"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "input_border_color",
+
+      "label": "Input border color",
+
+      "default": "#e5e5e5"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "input_focus_border",
+
+      "label": "Input focus border",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Button style"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_height",
+
+      "label": "Button height",
+
+      "min": 30,
+
+      "max": 70,
+
+      "step": 1,
+
+      "default": 44
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_min_width",
+
+      "label": "Button minimum width",
+
+      "min": 50,
+
+      "max": 180,
+
+      "step": 2,
+
+      "default": 86
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_padding_x",
+
+      "label": "Button side padding",
+
+      "min": 6,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 16
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_radius",
+
+      "label": "Button radius",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_border_width",
+
+      "label": "Button border width",
+
+      "min": 0,
+
+      "max": 5,
+
+      "step": 1,
+
+      "default": 1
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "button_font_size",
+
+      "label": "Button font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 14
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_background",
+
+      "label": "Button background",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_text_color",
+
+      "label": "Button text",
+
+      "default": "#ffffff"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_border_color",
+
+      "label": "Button border",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_hover_background",
+
+      "label": "Button hover background",
+
+      "default": "#333333"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_hover_text_color",
+
+      "label": "Button hover text",
+
+      "default": "#ffffff"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "button_hover_border_color",
+
+      "label": "Button hover border",
+
+      "default": "#333333"
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Note and error"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "note_color",
+
+      "label": "Note color",
+
+      "default": "#777777"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "note_size",
+
+      "label": "Note size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "note_gap_bottom",
+
+      "label": "Note bottom gap",
+
+      "min": 0,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "error_color",
+
+      "label": "Error color",
+
+      "default": "#d92d20"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "error_size",
+
+      "label": "Error size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "error_gap_bottom",
+
+      "label": "Error bottom gap",
+
+      "min": 0,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Result style"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "result_background",
+
+      "label": "Result background",
+
+      "default": "#f8f8f8"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "result_text_color",
+
+      "label": "Result text color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "result_border_color",
+
+      "label": "Result border",
+
+      "default": "#e5e5e5"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "pin_color",
+
+      "label": "Pincode color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "date_color",
+
+      "label": "Delivery date color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_padding_y",
+
+      "label": "Result vertical padding",
+
+      "min": 4,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 11
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_padding_x",
+
+      "label": "Result side padding",
+
+      "min": 4,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 12
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_radius",
+
+      "label": "Result radius",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_border_width",
+
+      "label": "Result border width",
+
+      "min": 0,
+
+      "max": 5,
+
+      "step": 1,
+
+      "default": 1
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_gap",
+
+      "label": "Result box gap",
+
+      "min": 0,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "result_font_size",
+
+      "label": "Result font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 14
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "tick_color",
+
+      "label": "Tick color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "tick_size",
+
+      "label": "Tick size",
+
+      "min": 8,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 14
+
+    },
+
+    {
+
+      "type": "color",
+
+      "id": "change_color",
+
+      "label": "Change color",
+
+      "default": "#111111"
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "change_size",
+
+      "label": "Change size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "checkbox",
+
+      "id": "change_underline",
+
+      "label": "Underline change text",
+
+      "default": true
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "icon_size",
+
+      "label": "Icon size",
+
+      "min": 8,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 16
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Mobile style"
+
+    },
+
+    {
+
+      "type": "checkbox",
+
+      "id": "mobile_stack",
+
+      "label": "Stack input and button",
+
+      "default": false
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_margin_top",
+
+      "label": "Mobile margin top",
+
+      "min": 0,
+
+      "max": 80,
+
+      "step": 2,
+
+      "default": 0
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_margin_bottom",
+
+      "label": "Mobile margin bottom",
+
+      "min": 0,
+
+      "max": 80,
+
+      "step": 2,
+
+      "default": 0
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_box_padding",
+
+      "label": "Mobile box padding",
+
+      "min": 0,
+
+      "max": 60,
+
+      "step": 1,
+
+      "default": 12
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_border_radius",
+
+      "label": "Mobile box radius",
+
+      "min": 0,
+
+      "max": 40,
+
+      "step": 1,
+
+      "default": 10
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_label_size",
+
+      "label": "Mobile label size",
+
+      "min": 8,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 11
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_heading_size",
+
+      "label": "Mobile heading size",
+
+      "min": 10,
+
+      "max": 34,
+
+      "step": 1,
+
+      "default": 15
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_subheading_size",
+
+      "label": "Mobile subheading size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_input_button_gap",
+
+      "label": "Mobile input button gap",
+
+      "min": 0,
+
+      "max": 30,
+
+      "step": 1,
+
+      "default": 8
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_input_height",
+
+      "label": "Mobile input height",
+
+      "min": 30,
+
+      "max": 70,
+
+      "step": 1,
+
+      "default": 42
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_input_font_size",
+
+      "label": "Mobile input font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_button_height",
+
+      "label": "Mobile button height",
+
+      "min": 30,
+
+      "max": 70,
+
+      "step": 1,
+
+      "default": 42
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_button_min_width",
+
+      "label": "Mobile button min width",
+
+      "min": 50,
+
+      "max": 180,
+
+      "step": 2,
+
+      "default": 78
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_button_font_size",
+
+      "label": "Mobile button font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "range",
+
+      "id": "mobile_result_font_size",
+
+      "label": "Mobile result font size",
+
+      "min": 10,
+
+      "max": 24,
+
+      "step": 1,
+
+      "default": 13
+
+    },
+
+    {
+
+      "type": "header",
+
+      "content": "Advanced"
+
+    },
+
+    {
+
+      "type": "textarea",
+
+      "id": "custom_css",
+
+      "label": "Custom CSS",
+
+      "default": "/* Add custom CSS here */"
+
+    }
+
+  ],
+
+  "presets": [
+
+    {
+
+      "name": "Delivery checker"
+
+    }
+
+  ]
+
+}
+
+{% endschema %}
