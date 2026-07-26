@@ -484,6 +484,68 @@
         "padding-block-end": 48
       }
     },
+    "section_Te9J9W": {
+      "type": "section",
+      "blocks": {
+        "text_zxd7rm": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2>Why Choose Kurowear?</h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_zxd7rm"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_fYhREw": {
       "type": "section",
       "blocks": {
@@ -631,7 +693,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
+            "padding-block-start": 10,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -741,7 +803,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
+            "padding-block-start": 10,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -851,7 +913,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
+            "padding-block-start": 10,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -962,7 +1024,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
+            "padding-block-start": 10,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -1046,7 +1108,6 @@
         "group_cHdFtL",
         "group_LDyJJP"
       ],
-      "custom_css": [],
       "name": "t:names.multicolumn",
       "settings": {
         "content_direction": "row",
@@ -1059,7 +1120,7 @@
         "gap": 24,
         "section_width": "page-width",
         "section_height": "",
-        "section_height_custom": 0,
+        "section_height_custom": 50,
         "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
@@ -1068,7 +1129,7 @@
         "border_width": 1,
         "border_opacity": 100,
         "border_radius": 0,
-        "toggle_overlay": false,
+        "toggle_overlay": true,
         "overlay_color": "#ffffff",
         "overlay_style": "solid",
         "gradient_direction": "to top",
@@ -1288,7 +1349,7 @@
         "gap": 13,
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 24
       }
     },
     "section_LhfQPA": {
@@ -1588,6 +1649,7 @@
     "hero_jVaWmY",
     "collection_list_Wd7UDM",
     "product_list_fa6P9H",
+    "section_Te9J9W",
     "section_fYhREw",
     "178153720500d7ca55",
     "featured_blog_posts_qnacPR",
