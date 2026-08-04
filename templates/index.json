@@ -466,7 +466,7 @@
       "name": "Featured collection",
       "settings": {
         "collection": "best-seller",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 8,
         "columns": 4,
@@ -1174,7 +1174,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "var(--color-foreground)",
+                "color": "var(--color-foreground-heading)",
                 "text": "<h4>{{ closest.article.title }}</h4>",
                 "read_only": false,
                 "alignment": "left",
@@ -1214,7 +1214,7 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
-                "padding-block-start": 12,
+                "padding-block-start": 0,
                 "padding-block-end": 0
               },
               "blocks": {}
@@ -1290,7 +1290,7 @@
           "type": "accordion",
           "name": "t:names.accordion",
           "settings": {
-            "icon": "caret",
+            "icon": "plus",
             "dividers": true,
             "type_preset": "h3",
             "inherit_color_scheme": true,
